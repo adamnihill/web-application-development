@@ -1,0 +1,107 @@
+<DOCTYPE HTML>
+<html>
+<head lang="en">
+    <title>Home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!--Sourse for d3js-->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    
+    <!--Link to external stylesheet-->
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
+<head>
+<body>
+    
+    <!--Created Div to store Header-->
+    <div class="header">
+        
+        <!--Imported PNG images to use as company logos--> 
+        <img id="logo" src="logos/logo.png" alt="logo">
+        <img id="logo2" src="logos/logo2.png" alt="logo2">
+        
+        <!--Website is based on the fictional delivery company featured in the TV show Futurama-->
+        <h1>PLANET EXPRESS</h1>
+        
+        <!--User a quote from Futurama as the companies tag line-->
+        <p>Don't you worry about Planet Express, let me worry about blank!</p>
+    </div>
+
+<!--Created div to contain a navigation bar-->
+<div class="navbar">
+
+  <!--The navbar contains links for the home page, all linked pages, and a login form-->    
+  <a href="home.html">Home</a>
+  <a href="crew.html">Crew</a>
+  <a href="statistics.html">Statistics</a>
+    
+  <!--Created an empty p tag to contain the users email address on login. Achieved through the use of a javascript function-->    
+  <p id="replacementLogin"></p> 
+    
+  <!--div containing a login form-->     
+  <div id="loginContainer">
+    
+    <!--myFunction is call on submit, validating the correct information is entered and replacing login form wiht user's email-->  
+    <form action="/action_page.php" onsubmit="myFunction()">
+        
+      <!--Defined input type for email and password, setting both to required-->    
+      <input name = "fname" id="username" type="email" placeholder="Username" name="username" required>
+      <input type="password" placeholder="Password" name="psw" required>
+      <button type="submit">Login</button>
+    </form>      
+  </div>    
+</div>
+
+    
+<!--div containing two rows that styled in external stylesheet-->    
+<div class="row">
+  <div class="side">
+    <h2>About Us</h2>
+    <p>We are an intergalactic delivery company founded in New New York.</p>
+    <img src="images/headquarters.png" alt="headquarters" width=313px><br>
+    <p>We offer first class delivery services to any part of the known and unknown universe.</p> 
+    <h2>Meet Our Staff</h2> 
+    <img src="images/staff.png" alt="staff" width =313px><br> 
+    <p>Doctor Zoidberg, Professor Farnsworth, Hermes Conrad, Philip Fry, Turanga Leela, Amy Wong, and Bender.</p>  
+    </div>
+  <div class="main">
+    <h2>Our Services</h2><br>
+    <div id="diveLeft">  
+    <img id="imageRight" src="images/ship.jpg" alt="ship" hspace="20">  
+    <h3>Package Delivery </h3>
+    <p>We specialise in intergalactic deliveries, completing over 100 deliveries since our inception. Detailed statistics can be viewed on our <a href="statistics.html">Statistics</a> page. </p> 
+    <p>We operate the state of the art <b>U.S.S.<i>Planet Express Ship</i></b> on all of our deliveries. To ensure successful delivery of your package we employee an experienced crew, details of which can be found on our <a href="crew.html">crew</a> page.</p>
+    </div>  
+    <div id="divRight">  
+    <img id="imageLeft" src="images/nibbler.jpg" alt="nibbler" hspace="20">  
+    <h3>Charity Work</h3>
+    <p>During an attack by the MOM corporation on the planet Vergon-6 we launched a charity mission to rescue the at risk animals that inhabited the planet.</p>
+    <p>We rescued the Niblonian Nibbler, pictured to the left, who was later adopted by our Captain Turanga Leela.</p>
+    </div>  
+      
+    </div>
+</div>
+
+</body>
+<script>
+    
+//Declared Function named myFunction
+function myFunction() {
+    
+  //Captured the user's email address  that was entered into the login form     
+  var x = document.getElementById("username").value;
+    
+  //Replaced the innerHTML with a string saying "Welcome + the user's email address    
+  document.getElementById("replacementLogin").innerHTML = "Welcome " + x; 
+    
+  //Hid login form by setting its display to none    
+  var y = document.getElementById("loginContainer");
+  y.style.display = "none"; 
+    
+  //Unhid div with id replacementLogin by setting display to block
+  //Display was set to none using css    
+  var z = document.getElementById("replacementLogin");
+  z.style.display ="block";
+}
+</script>
+</html>

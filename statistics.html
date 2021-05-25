@@ -1,0 +1,245 @@
+<DOCTYPE HTML>
+<html>
+<head lang="en">
+    <title>Home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
+    <style>
+        rect:hover {fill: grey;}
+    </style>
+<head>
+<body>
+    <!--Created Div to store Header-->
+    <div class="header">
+        
+        <!--Imported PNG images to use as company logos--> 
+        <img id="logo" src="logos/logo.png" alt="logo">
+        <img id="logo2" src="logos/logo2.png" alt="logo2">
+        
+        <!--Website is based on the fictional delivery company featured in the TV show Futurama-->
+        <h1>PLANET EXPRESS</h1>
+        
+        <!--User a quote from Futurama as the companies tag line-->
+        <p>Don't you worry about Planet Express, let me worry about blank!</p>
+    </div>
+
+<!--Created div to contain a navigation bar-->
+<div class="navbar">
+
+  <!--The navbar contains links for the home page, all linked pages, and a login form-->    
+  <a href="home.html">Home</a>
+  <a href="crew.html">Crew</a>
+  <a href="statistics.html">Statistics</a>
+    
+    
+  <!--Created an empty p tag to contain the users email address on login. Achieved through the use of a javascript function-->    
+  <p id="replacementLogin"></p> 
+    
+  <!--div containing a login form-->     
+  <div id="loginContainer">
+    
+    <!--myFunction is call on submit, validating the correct information is entered and replacing login form wiht user's email-->  
+    <form action="/action_page.php" onsubmit="myFunction()">
+        
+      <!--Defined input type for email and password, setting both to required-->    
+      <input name = "fname" id="username" type="email" placeholder="Username" name="username" required>
+      <input type="password" placeholder="Password" name="psw" required>
+      <button type="submit">Login</button>
+    </form>      
+  </div>    
+</div>
+
+<!--div containing two rows that styled in external stylesheet-->
+<div class="row">
+  <div class="side">
+    <h3 id="chartHeading">Last Year</h3>
+    <p>Our first chart documents the number deliveries we carried out per month. Note the increase of deliveries in the run-up to Christmas.</p>
+    Select Chart Colour:<input type="color" id="colourPicker">  
+    <button onclick="drawChart()">Draw Chart</button>  
+  </div>
+  <div class="main"> 
+    <h2>Charts</h2>
+    <p>Charts documenting the number of deliveries carried out monthly for the past year, and yearly since or inception are available below.
+    </p>
+    <p>To view these charts, select a colour in the sidebar and then press "Draw Chart".
+    </p>
+    <div id="mySVG"></div>
+     
+      
+  </div>
+</div>
+    
+</body>
+    
+<script>
+//Declared Function named myFunction
+function myFunction() {
+    
+  //Captured the user's email address  that was entered into the login form     
+  var x = document.getElementById("username").value;
+    
+  //Replaced the innerHTML with a string saying "Welcome + the user's email address    
+  document.getElementById("replacementLogin").innerHTML = "Welcome " + x; 
+    
+  //Hid login form by setting its display to none    
+  var y = document.getElementById("loginContainer");
+  y.style.display = "none"; 
+    
+  //Unhid div with id replacementLogin by setting display to block
+  //Display was set to none using css    
+  var z = document.getElementById("replacementLogin");
+  z.style.display ="block";
+}
+
+function drawChart(){
+    
+    //Declared array of data used for bar chart
+    var myArray = [19, 22, 16, 16, 20, 29, 26, 20, 13, 26, 30, 39];
+    
+    //Declared a variabled containing user's colour choice 
+    var chartColour = document.getElementById("colourPicker").value;
+
+    //Set scale for bar chart
+    var myScale = d3.scaleLinear()
+        .domain([0, 40])
+        .range([0, 190]);
+
+    //Set a second scale for y-axis to avoid inverting data used to generate bar chart 
+    var yScale = d3.scaleLinear()
+        .domain([0, 40])
+        .range([190, 0]);
+
+    //Set a third scale for x-axis
+    var xScale = d3.scaleBand()
+        .domain(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"])
+        .range([0, 626]);
+
+    //Created y-axis
+    var yAxis = d3.axisLeft()
+        .scale(yScale);
+
+    //Created x-axis
+    var xAxis = d3.axisBottom()
+        .scale(xScale);
+    
+    //Set d3 to remove previously drawn bar chart 
+    //Thus prevents barchart from being rendered multiple times 
+    d3.select("#mySVG").selectAll("*").remove();
+
+    //Created an empty svgContainer 
+    let svgContainer = d3.select("#mySVG").append("svg")
+        .attr("width", 700)
+        .attr("height", 1000);
+
+    //Created a rectangle  
+    let myRectangle = svgContainer.selectAll("rect")
+    .data(myArray);
+ 
+    //Added attributes to rectangle
+    myRectangle.enter()
+        .append("rect")
+        .attr("x", function(d,i){
+                return myScale(11 + (i*11));
+            })
+        .attr("y", function(d){
+                return myScale(41);
+            })
+        .attr("width", myScale(10))
+        .transition()
+        .duration(2000)
+        .ease(d3.easeBounceOut)
+            .attr("x", function(d,i){
+                return myScale(11 + (i*11));
+            })
+            .attr("y", function(d){
+                return myScale(41 - d);
+            })
+            .attr("width", myScale(10))
+            .attr("height", function(d){
+                return myScale(d);
+            })
+            .attr("fill", chartColour);
+
+
+    //Add Labels for bar chart 
+    let myLabels = svgContainer.selectAll("text")
+    .data(myArray);
+
+    //set attributes for Labels
+    myLabels.enter()
+        .append("text")
+        .attr("x", function(d,i){
+                return myScale(14 + (i*11));
+        })
+        .attr("y", myScale(41))
+        .transition()
+        .duration(3000)
+            .attr("x", function(d,i){
+                return myScale(14 + (i*11));
+            })
+            .attr("y", function(d){
+                return myScale(47 - d);
+            })
+            .attr("fill", "white")
+            .text(function(d){
+                return d;
+            });
+
+    //Called yAxis
+    svgContainer.append("g")
+            .attr("transform", "translate(48, 5)")
+            .call(yAxis);
+
+    //Called xAxis
+    svgContainer.append("g")
+        .attr("transform", "translate(48, 195)")
+        .call(xAxis);
+    
+    d3.csv("myPythonWebServer/deliveries.csv").then(function(data){
+    consol.log(data);
+
+
+   //Could not get csv based bar chart to render before deadline
+    //Create an empty svgContainer 
+    let svgContainer2 = d3.select("#mySVG").append("svg")
+        .attr("width", 700)
+        .attr("height", 1000);
+
+    //Create a rectangle  
+    let myRectangle2 = svgContainer.selectAll("rect2")
+    .data(data);
+ 
+    //Added attributes to rectangle
+    myRectangle2.enter()
+        .append("rect2")
+        .attr("x", function(d,i){
+                return myScale(11 + (i*11));
+            })
+        .attr("y", function(d){
+                return myScale(123);
+            })
+        .attr("width", myScale(10))
+        .transition()
+        .duration(2000)
+        .ease(d3.easeBounceOut)
+            .attr("x", function(d,i){
+                return myScale(11 + (i*11));
+            })
+            .attr("y", function(d){
+                return myScale(123 - d);
+            })
+            .attr("width", myScale(10))
+            .attr("height", function(d){
+                return myScale(d.deliveries);
+            })
+            .attr("fill", chartColour);  
+})
+}
+    
+
+
+
+</script>
+</html>

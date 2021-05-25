@@ -1,0 +1,174 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h2 {
+    text-align: center;
+}
+.header {
+  padding: 80px; /* some padding */
+  text-align: center; /* center the text */
+  background: #1abc9c; /* green background */
+  color: white; /* white text color */
+  
+}
+
+#logo {
+  display: block;
+  float: left;
+  height: 176px;
+}
+
+#logo2 {
+  display: block;
+  float: right;
+  height: 176px;
+}
+/* Increase the font size of the <h1> element */
+.header h1 {
+  font-size: 60px;
+}
+
+/* Style the top navigation bar */
+.navbar {
+  overflow: hidden; /* Hide overflow */
+  background-color: #333; /* Set background color */
+}
+
+/* Style the navigation bar links */
+.navbar a {
+  float: left; /* Make sure that the links stay side-by-side */
+  display: block; /* Change the display to block */
+  color: white; /* Set text colour */
+  text-align: center; /* Center the text */
+  padding: 14px 20px; /* Set padding */
+  text-decoration: none; /* Remove underline */
+}
+
+/* Change color on hover/mouse-over */
+.navbar a:hover {
+  background-color: #ddd; /* Grey background color */
+  color: black; /* Black text color */
+}
+
+.navbar #loginContainer {
+  float: right; /* set float attribute */
+  padding-top: 12px; /* Set top padding */
+  padding-right: 15; /* Set right padding */
+}
+
+#replacementLogin {
+    color: white; /* Set text colour */
+    padding-right: 15; /* Set right padding */
+    display: none; /* Set display to none in order to hide element until an event is triggered */
+    float: right; /* set float attribute */
+}
+
+/* Style the input field inside the navbar */
+.navbar input[type=text] {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: none;
+  width: 150px; /* Set Width of input bar */
+}
+
+/* Style the button inside the input container */
+.navbar .loginContainer button {
+  float: right;
+  padding: 6px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+.navbar .loginContainer button:hover {
+  background: #ccc;
+}
+/* Ensure proper sizing */
+* {
+  box-sizing: border-box;
+}
+
+/* Column container */
+.row { 
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+.side {
+  flex: 30%; /* Set the width of the sidebar */
+  background-color: #f1f1f1; /* Set background color */
+  padding: 20px; /* Set padding */
+}
+
+#deliveryForm {
+    display: block;
+    font-size: 125%;
+
+}
+
+#thanks {
+    display: none; /* Set display to none in order to hide element until an event is triggered */
+    text-align: center;
+    font-size: 125%;
+}
+
+/* Main column */
+.main { 
+  flex: 70%; /* Set the width of the main content */
+  background-color: white; /* White background color */
+  padding: 20px; /* Set padding */
+}
+
+/* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 700px) {
+  .row { 
+    flex-direction: column;
+  }
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+  .navbar a {
+    float: none;
+    width: 100%;
+  }
+}
+
+#imageRight {
+    float: right;
+    width: 313px;
+}
+
+#imageLeft {
+    float: left;
+    width: 313px;
+}
+
+#divLeft {
+    padding-top:10px;
+    padding-bottom: 10px;
+    padding-left: 10px;  
+    display: block;
+    float: left;
+    clear: right;
+}
+
+#divRight {
+    padding-top: 10px;
+    padding right: 10px;
+    padding bottom: 10px;
+    display: block; 
+    float: right;
+    clear: left;
+}
+
+#chartHeading {
+    padding-top: 180px;
+}

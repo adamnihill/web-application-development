@@ -1,0 +1,137 @@
+<DOCTYPE HTML>
+<html>
+<head lang="en">
+    <title>Home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
+<head>
+<body>
+    
+       <!--Created Div to store Header-->
+    <div class="header">
+        
+        <!--Imported PNG images to use as company logos--> 
+        <img id="logo" src="logos/logo.png" alt="logo">
+        <img id="logo2" src="logos/logo2.png" alt="logo2">
+        
+        <!--Website is based on the fictional delivery company featured in the TV show Futurama-->
+        <h1>PLANET EXPRESS</h1>
+        
+        <!--User a quote from Futurama as the companies tag line-->
+        <p>Don't you worry about Planet Express, let me worry about blank!</p>
+    </div>
+
+<!--Created div to contain a navigation bar-->
+<div class="navbar">
+
+  <!--The navbar contains links for the home page, all linked pages, and a login form-->    
+  <a href="home.html">Home</a>
+  <a href="crew.html">Crew</a>
+  <a href="statistics.html">Statistics</a>
+    
+  <!--Created an empty p tag to contain the users email address on login. Achieved through the use of a javascript function-->    
+  <p id="replacementLogin"></p> 
+    
+  <!--div containing a login form-->     
+  <div id="loginContainer">
+    
+    <!--myFunction is call on submit, validating the correct information is entered and replacing login form wiht user's email-->  
+    <form action="/action_page.php" onsubmit="myFunction()">
+        
+      <!--Defined input type for email and password, setting both to required-->    
+      <input name = "fname" id="username" type="email" placeholder="Username" name="username" required>
+      <input type="password" placeholder="Password" name="psw" required>
+      <button type="submit">Login</button>
+    </form>      
+  </div>    
+</div>
+
+<!--div containing two rows that styled in external stylesheet-->
+<div class="row">
+  <div class="side">
+    <h2>Delivery Inquiries</h2>
+      <p id="thanks"></p>
+    <div id="deliveryForm">  
+        
+        <!--Create a form for entering delivery inquieries-->
+        <form action="/action_page.php" onsubmit="thankYou()">
+            First Name:<br>
+            <input type="text" id="firstName" required><br>
+            Last Name:<br>
+            <input type="text" id="lastName" required><br>
+            Package Weight (in kg):<br>
+            <input type="number" name="weight" required><br>
+            Delivery Type:<br>
+            <input type="radio" name="deliveryType" value="domestic (earth)" checked> Domestic (Earth)<br>
+            <input type="radio" name="deliveryType" value="galacic"> Galactic<br>
+            <input type="radio" name="deliveryType" value="Intergalactic"> Intergalactic<br>
+            <button type="submit">Login</button>
+
+          </form>  
+      </div>    
+    </div>
+  <div class="main">
+    <h2>Delivery Crew</h2><br>
+    <div id="divLeft">
+    <img id="imageRight" src="images/fry.png" alt="fry" hspace="20">
+    <h3>Philip J. Fry</h3> 
+    <!--Text in p tags taken from character's wiki page-->
+    <p>Philip was a native to the 20th century who was cryogenically frozen seconds into the year 2000, having fallen in just as 1999 ended. He was revived in 2999 and subsequently became a Delivery boy for the Planet Express Company. </p> </div>
+    <div id="divRight">
+    <img id="imageLeft" src="images/leela.jpg" alt="leela" hspace="20">
+    <h3>Turanga Leela</h3>
+    <p>With a "no rain or sleet" attitude and a "kick-your-ass" grace, this delivery captain is a refreshing source of professionalism to counterpoint the rest of the crew.</p>
+    <p>For better or worse, the ship runs on her high octane passions, be it because of her longing for family, her love of violence, her commitment to a job well done, or her affection for animals.</p>   </div>
+    <div id="divLeft">
+    <img id="imageRight" src="images/bender.jpg" alt="bender" hspace="20">
+    <h3>Bender</h3>
+    <p>Bender is also fascinated with cooking, though he is shown to have no sense of actual human taste, often creating dishes that can even kill plant life. He also thinks that humans eat rocks.</p>
+    <p>Magnets, when attached to his head, cause him to lose his sense of inhibition and act like a folk singer.</p>    
+    </div>
+</div>
+</div>
+    
+
+
+</body>
+<script>
+//Declared Function named myFunction
+function myFunction() {
+    
+  //Captured the user's email address  that was entered into the login form     
+  var x = document.getElementById("username").value;
+    
+  //Replaced the innerHTML with a string saying "Welcome + the user's email address    
+  document.getElementById("replacementLogin").innerHTML = "Welcome " + x; 
+    
+  //Hid login form by setting its display to none    
+  var y = document.getElementById("loginContainer");
+  y.style.display = "none"; 
+    
+  //Unhid div with id replacementLogin by setting display to block
+  //Display was set to none using css    
+  var z = document.getElementById("replacementLogin");
+  z.style.display ="block";
+}
+
+function thankYou() {
+  
+  //Captured user's first name when entered in inquiry form    
+  var x = document.getElementById("firstName").value;
+    
+  //Appended user's name with a thank you message    
+  document.getElementById("thanks").innerHTML = "Good News " + x + "! " + "Your inquiry has been received. We will respond to you soon."; 
+    
+  //Hid inquiry form by setting its display to none     
+  var y = document.getElementById("deliveryForm");
+  y.style.display = "none"; 
+    
+  //Unhid div with id thanks by setting display to block
+  //Display was set to none using css 
+  var z = document.getElementById("thanks");
+  z.style.display ="block";
+}
+</script>
+</html>
